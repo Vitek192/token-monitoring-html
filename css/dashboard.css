@@ -1,0 +1,208 @@
+/* ============================================
+   DASHBOARD PAGE - SPECIFIC STYLES
+   ============================================ */
+
+/* ========== DASHBOARD GRID ========== */
+#stats-container {
+    animation: fadeInUp 0.5s ease-out;
+  }
+  
+  #workflows-container {
+    animation: fadeInUp 0.6s ease-out;
+  }
+  
+  #tokens-container {
+    animation: fadeInUp 0.7s ease-out;
+  }
+  
+  /* ========== ANIMATIONS ========== */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  
+  /* ========== STAT CARDS ENHANCEMENTS ========== */
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #10b981, #3b82f6);
+    border-radius: 0.75rem 0.75rem 0 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .stat-card:hover::before {
+    opacity: 1;
+  }
+  
+  .stat-card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* ========== TOKEN CARD INTERACTIONS ========== */
+  .token-card::after {
+    content: '→';
+    position: absolute;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    font-size: 1.25rem;
+    color: #10b981;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s;
+  }
+  
+  .token-card:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* ========== WORKFLOW STATUS INDICATORS ========== */
+  .workflow-card .status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+  }
+  
+  .workflow-card.status-running .status-dot {
+    background-color: #10b981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+    animation: pulse 2s infinite;
+  }
+  
+  .workflow-card.status-paused .status-dot {
+    background-color: #f59e0b;
+  }
+  
+  .workflow-card.status-failed .status-dot {
+    background-color: #ef4444;
+  }
+  
+  /* ========== LOADING SKELETON ========== */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      #1f2937 25%,
+      #374151 50%,
+      #1f2937 75%
+    );
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 0.375rem;
+  }
+  
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  
+  .skeleton-card {
+    height: 150px;
+  }
+  
+  .skeleton-text {
+    height: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* ========== FILTER BAR ========== */
+  .filter-bar {
+    background-color: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* ========== EMPTY STATES ========== */
+  #tokens-empty,
+  #workflows-empty {
+    padding: 3rem;
+    text-align: center;
+  }
+  
+  #tokens-empty svg,
+  #workflows-empty svg {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1rem;
+    color: #4b5563;
+  }
+  
+  /* ========== REFRESH ANIMATION ========== */
+  #refresh-btn.spinning svg {
+    animation: spin 1s linear infinite;
+  }
+  
+  /* ========== RESPONSIVE ADJUSTMENTS ========== */
+  @media (max-width: 768px) {
+    #stats-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .token-card::after {
+      display: none;
+    }
+  }
+  
+  /* ========== TOOLTIPS ========== */
+  [title] {
+    position: relative;
+    cursor: help;
+  }
+  
+  /* ========== SUCCESS METRICS ========== */
+  .success-high {
+    color: #10b981;
+  }
+  
+  .success-medium {
+    color: #f59e0b;
+  }
+  
+  .success-low {
+    color: #ef4444;
+  }
+  
+  /* ========== TIER INDICATORS ========== */
+  .bg-green-500 {
+    background-color: #10b981;
+  }
+  
+  .bg-blue-500 {
+    background-color: #3b82f6;
+  }
+  
+  .bg-red-500 {
+    background-color: #ef4444;
+  }
+  
+  .bg-gray-500 {
+    background-color: #6b7280;
+  }

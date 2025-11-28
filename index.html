@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Token Monitoring System - Dashboard</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="bg-gray-900 text-gray-100">
+  
+  <!-- Navigation -->
+  <nav class="bg-gray-800 border-b border-gray-700">
+    <div class="container mx-auto px-4 py-3">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-8">
+          <h1 class="text-xl font-bold text-green-400">Token Monitor</h1>
+          <div class="hidden md:flex space-x-4">
+            <a href="index.html" class="nav-link active">Dashboard</a>
+            <a href="tokens.html" class="nav-link">Tokens</a>
+            <a href="analytics.html" class="nav-link">Analytics</a>
+            <a href="settings.html" class="nav-link">Settings</a>
+          </div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <div class="text-sm text-gray-400" id="last-update">
+            Updated: <span id="update-time">--:--</span>
+          </div>
+          <button id="refresh-btn" class="btn-icon" title="Refresh">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-6">
+    
+    <!-- System Stats -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">System Overview</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="stats-container">
+        
+        <!-- Stat Card 1 -->
+        <div class="stat-card">
+          <div class="stat-label">Active Tokens</div>
+          <div class="stat-value" id="stat-active-tokens">--</div>
+          <div class="stat-change text-green-400" id="stat-active-change">--</div>
+        </div>
+        
+        <!-- Stat Card 2 -->
+        <div class="stat-card">
+          <div class="stat-label">Discovered Today</div>
+          <div class="stat-value" id="stat-discovered-today">--</div>
+          <div class="stat-change text-blue-400" id="stat-discovered-change">--</div>
+        </div>
+        
+        <!-- Stat Card 3 -->
+        <div class="stat-card">
+          <div class="stat-label">Died Today</div>
+          <div class="stat-value" id="stat-died-today">--</div>
+          <div class="stat-change text-red-400" id="stat-died-change">--</div>
+        </div>
+        
+        <!-- Stat Card 4 -->
+        <div class="stat-card">
+          <div class="stat-label">System Health</div>
+          <div class="stat-value" id="stat-system-health">--%</div>
+          <div class="stat-change" id="stat-health-status">--</div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Workflows Status -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">Workflows Status</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="workflows-container">
+        <!-- Workflow cards will be inserted here -->
+      </div>
+    </section>
+
+    <!-- Active Tokens -->
+    <section>
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold">Active Tokens</h2>
+        <div class="flex items-center space-x-4">
+          <!-- Filters -->
+          <select id="filter-tier" class="input-select">
+            <option value="">All Tiers</option>
+            <option value="1">Tier 1 (High Priority)</option>
+            <option value="2">Tier 2 (Normal)</option>
+          </select>
+          <select id="filter-sort" class="input-select">
+            <option value="age">Sort by Age</option>
+            <option value="liquidity">Sort by Liquidity</option>
+            <option value="price">Sort by Price</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Tokens Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="tokens-container">
+        <!-- Token cards will be inserted here -->
+      </div>
+      
+      <!-- Loading State -->
+      <div id="tokens-loading" class="text-center py-12">
+        <div class="loader"></div>
+        <p class="text-gray-400 mt-4">Loading tokens...</p>
+      </div>
+      
+      <!-- Empty State -->
+      <div id="tokens-empty" class="text-center py-12 hidden">
+        <p class="text-gray-400">No tokens found</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Global Loader -->
+  <div id="global-loader" class="loader-overlay">
+    <div class="loader"></div>
+    <p class="loader-text mt-4">Loading...</p>
+  </div>
+
+  <!-- Notification Container -->
+  <div id="notifications"></div>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/pages/dashboard.js"></script>
+  
+</body>
+</html>
